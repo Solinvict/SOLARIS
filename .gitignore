@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+
+# Local runtime and databases
+.runtime/
+*.db
+*.db-shm
+*.db-wal
+
+# Local eval / scratch artifacts
+.pytest-run*/
+.pytest-tmp/
+.tmp*/
+pytest-cache-files-*/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Local secrets
+.env
+
+# Editor / OS
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

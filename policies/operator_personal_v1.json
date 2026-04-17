@@ -1,0 +1,39 @@
+{
+  "name": "operator_personal_v1",
+  "version": 1,
+  "factor_weights": {
+    "consequence": 0.20,
+    "recurrence": 0.15,
+    "identity_relevance": 0.20,
+    "future_utility": 0.20,
+    "user_emphasis": 0.25,
+    "unresolvedness": 0.0,
+    "novelty": 0.0,
+    "anti_repeat_value": 0.0
+  },
+  "kind_biases": {
+    "decision": 0.25,
+    "failure": 0.25,
+    "fact_assertion": 0.20,
+    "summary": 0.10,
+    "message": 0.0,
+    "state_update": -0.20
+  },
+  "promotion_threshold": 0.68,
+  "reinforce_threshold": 0.55,
+  "retire_threshold": 0.2,
+  "adjudication": {
+    "mode": "shadow",
+    "enabled": true,
+    "artifact_types": ["claim", "episode"],
+    "allowed_actions": ["promote", "leave_candidate", "retire"],
+    "ambiguity_band": {
+      "candidate_floor": 0.35,
+      "candidate_ceiling": 0.82,
+      "promotion_margin": 0.10,
+      "retire_margin": 0.08
+    }
+  },
+  "protected_subjects": [],
+  "default_recall_mode": "default"
+}

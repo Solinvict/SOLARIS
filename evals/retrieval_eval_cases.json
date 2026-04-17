@@ -1,0 +1,369 @@
+{
+  "cases": [
+    {
+      "id": "fact_where_do_i_live",
+      "family": "fact_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "interaction_1", "kind": "interaction" }
+        ],
+        "events": [
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:00:00+00:00",
+            "idempotency_key": "eval-live-note",
+            "kind": "note",
+            "raw_text": "Remember this I live in Example City",
+            "normalized_text": "remember this i live in example city",
+            "importance": 0.9,
+            "confidence": 0.95,
+            "structured_payload": {
+              "route_domain": "memory",
+              "route_action": "remember_note",
+              "claim": {
+                "predicate": "asserts",
+                "object_text": "I live in Example City",
+                "canonical_claim": "I live in Example City",
+                "confidence": 0.9,
+                "pinned": false
+              }
+            }
+          }
+        ],
+        "reviews": [
+          { "mode": "boundary", "limit": 50 }
+        ]
+      },
+      "query": {
+        "text": "where do I live",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "claim",
+        "allowed_top_texts": ["I live in Example City"],
+        "forbidden_texts": ["Remember this I live in Example City"],
+        "meta_assertions": {
+          "scope_intent": "identity",
+          "identity_focus_applied": true
+        },
+        "artifact_assertions": [
+          {
+            "artifact_type": "claim",
+            "match_field": "canonical_claim",
+            "match_value": "I live in Example City",
+            "remember_state": "remembered"
+          }
+        ]
+      }
+    },
+    {
+      "id": "identity_what_is_my_name",
+      "family": "fact_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "interaction_1", "kind": "interaction" }
+        ],
+        "events": [
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:05:00+00:00",
+            "idempotency_key": "eval-name-fact",
+            "kind": "fact_assertion",
+            "raw_text": "Remember my name is Jordan",
+            "normalized_text": "remember my name is jordan",
+            "importance": 0.95,
+            "confidence": 0.95,
+            "structured_payload": {
+              "route_domain": "memory",
+              "route_action": "remember_fact",
+              "claim": {
+                "predicate": "asserts",
+                "object_text": "operator has name Jordan",
+                "canonical_claim": "operator has name Jordan",
+                "confidence": 0.95,
+                "pinned": false
+              }
+            }
+          }
+        ],
+        "reviews": [
+          { "mode": "boundary", "limit": 50 }
+        ]
+      },
+      "query": {
+        "text": "what is my name",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "claim",
+        "allowed_top_texts": ["operator has name Jordan"],
+        "forbidden_texts": ["Remember my name is Jordan"],
+        "meta_assertions": {
+          "scope_intent": "identity",
+          "identity_focus_applied": true
+        },
+        "artifact_assertions": [
+          {
+            "artifact_type": "claim",
+            "match_field": "canonical_claim",
+            "match_value": "operator has name Jordan",
+            "remember_state": "remembered"
+          }
+        ]
+      }
+    },
+    {
+      "id": "session_latest_interaction",
+      "family": "session_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "runtime_1", "kind": "runtime" },
+          { "alias": "interaction_old", "kind": "interaction", "parent_alias": "runtime_1" },
+          { "alias": "interaction_latest", "kind": "interaction", "parent_alias": "runtime_1" }
+        ],
+        "events": [
+          {
+            "session_alias": "interaction_old",
+            "timestamp": "2026-04-10T09:00:00+00:00",
+            "idempotency_key": "eval-session-old",
+            "raw_text": "We talked about older architecture notes."
+          },
+          {
+            "session_alias": "interaction_latest",
+            "timestamp": "2026-04-10T09:05:00+00:00",
+            "idempotency_key": "eval-session-latest",
+            "raw_text": "We talked about the current session behavior."
+          }
+        ],
+        "close_sessions": ["interaction_old", "interaction_latest"],
+        "reviews": [
+          { "mode": "boundary", "limit": 50 }
+        ]
+      },
+      "query": {
+        "text": "what did we talk about in this session",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "event",
+        "allowed_top_texts": ["We talked about the current session behavior."],
+        "forbidden_texts": ["We talked about older architecture notes."],
+        "meta_assertions": {
+          "scope_intent": "this_session",
+          "session_narrowing_applied": true
+        }
+      }
+    },
+    {
+      "id": "recent_prefers_live_over_import",
+      "family": "session_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "runtime_1", "kind": "runtime" },
+          { "alias": "import_1", "kind": "import", "parent_alias": "runtime_1" },
+          { "alias": "interaction_live", "kind": "interaction", "parent_alias": "runtime_1" }
+        ],
+        "events": [
+          {
+            "session_alias": "import_1",
+            "timestamp": "2026-04-10T09:05:00+00:00",
+            "idempotency_key": "eval-import-memory",
+            "raw_text": "Remember this I live in Example City.",
+            "hints": {
+              "episode_hint": "profile-import"
+            },
+            "structured_payload": {
+              "route_domain": "memory",
+              "route_action": "remember_note"
+            }
+          },
+          {
+            "session_alias": "interaction_live",
+            "timestamp": "2026-04-10T09:10:00+00:00",
+            "idempotency_key": "eval-live-recent",
+            "raw_text": "We are discussing Solaris shadow-mode validation right now.",
+            "hints": {
+              "episode_hint": "shadow-mode-validation"
+            }
+          }
+        ],
+        "close_sessions": ["import_1", "interaction_live"],
+        "reviews": [
+          { "mode": "boundary", "limit": 50 }
+        ]
+      },
+      "query": {
+        "text": "what have we discussed recently",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "forbidden_texts": ["Remember this I live in Example City."],
+        "top_text_assertions": {
+          "event": ["We are discussing Solaris shadow-mode validation right now."]
+        },
+        "meta_assertions": {
+          "scope_intent": "recent",
+          "recent_focus_applied": true
+        }
+      }
+    },
+    {
+      "id": "archaeology_scope_relaxation",
+      "family": "archive_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "interaction_1", "kind": "interaction" }
+        ],
+        "events": [
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:21:00+00:00",
+            "idempotency_key": "archive-trail",
+            "raw_text": "We discussed the early Solaris archive trail.",
+            "hints": {
+              "episode_hint": "archive-trail"
+            }
+          }
+        ]
+      },
+      "query": {
+        "text": "show me everything including retired about Solaris",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "episode",
+        "allowed_top_texts": ["archive-trail"],
+        "meta_assertions": {
+          "scope_intent": "archaeology",
+          "archive_relaxation_applied": true
+        }
+      }
+    },
+    {
+      "id": "topic_query_prefers_real_topic_tokens",
+      "family": "topic_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "runtime_1", "kind": "runtime" },
+          { "alias": "interaction_1", "kind": "interaction", "parent_alias": "runtime_1" }
+        ],
+        "events": [
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:30:00+00:00",
+            "idempotency_key": "topic-query-generic",
+            "raw_text": "Please tell me what you remember from this session."
+          },
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:31:00+00:00",
+            "idempotency_key": "topic-query-trading",
+            "raw_text": "Are you aware of your trading capabilities"
+          }
+        ],
+        "close_sessions": ["interaction_1"]
+      },
+      "query": {
+        "text": "what do you remember about trading",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "event",
+        "allowed_top_texts": ["Are you aware of your trading capabilities"],
+        "forbidden_texts": ["Please tell me what you remember from this session."]
+      }
+    },
+    {
+      "id": "claim_query_filters_matching_event",
+      "family": "topic_recall",
+      "setup": {
+        "sessions": [
+          { "alias": "runtime_1", "kind": "runtime" },
+          { "alias": "interaction_1", "kind": "interaction", "parent_alias": "runtime_1" }
+        ],
+        "events": [
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:00:00+00:00",
+            "idempotency_key": "claim-filter-solaris",
+            "raw_text": "do you know what Solaris is"
+          },
+          {
+            "session_alias": "interaction_1",
+            "timestamp": "2026-04-10T09:01:00+00:00",
+            "idempotency_key": "claim-filter-noise",
+            "raw_text": "my favorite song is stairway to heaven"
+          }
+        ],
+        "close_sessions": ["interaction_1"]
+      },
+      "query": {
+        "text": "what is Solaris",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "event",
+        "allowed_top_texts": ["do you know what Solaris is"],
+        "forbidden_texts": ["my favorite song is stairway to heaven"]
+      }
+    },
+    {
+      "id": "graph_relation_depends_on",
+      "family": "graph_retrieval",
+      "setup": {
+        "sessions": [
+          { "alias": "runtime_1", "kind": "runtime" }
+        ],
+        "events": [
+          {
+            "session_alias": "runtime_1",
+            "timestamp": "2026-04-16T13:15:00+00:00",
+            "idempotency_key": "graph-query-multitoken-1",
+            "kind": "decision",
+            "raw_text": "Decision: graph memory depends on fractal memory.",
+            "normalized_text": "decision graph memory depends on fractal memory",
+            "importance": 0.95,
+            "confidence": 0.95,
+            "hints": {
+              "entities": ["graph memory", "fractal memory"],
+              "relations": [
+                { "src": "graph memory", "dst": "fractal memory", "type": "depends_on" }
+              ]
+            }
+          },
+          {
+            "session_alias": "runtime_1",
+            "timestamp": "2026-04-16T13:16:00+00:00",
+            "idempotency_key": "graph-query-multitoken-2",
+            "kind": "decision",
+            "raw_text": "Decision: fractal memory depends on graph memory.",
+            "normalized_text": "decision fractal memory depends on graph memory",
+            "importance": 0.95,
+            "confidence": 0.95,
+            "hints": {
+              "entities": ["fractal memory", "graph memory"],
+              "relations": [
+                { "src": "fractal memory", "dst": "graph memory", "type": "depends_on" }
+              ]
+            }
+          }
+        ],
+        "reviews": [
+          { "mode": "boundary", "limit": 50 }
+        ]
+      },
+      "query": {
+        "text": "what depends on fractal memory",
+        "recall_mode": "default"
+      },
+      "expect": {
+        "preferred_artifact_type": "relation",
+        "allowed_top_texts": ["graph memory depends_on fractal memory"],
+        "required_texts": ["graph memory", "fractal memory"],
+        "meta_assertions": {
+          "relation_focus_applied": true
+        }
+      }
+    }
+  ]
+}
