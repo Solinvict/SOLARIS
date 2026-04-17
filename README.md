@@ -99,6 +99,7 @@ Start here:
 
 - [Getting Started](./docs/getting_started.md)
 - [Usage Guide](./docs/usage_guide.md)
+- [Host Shadow Mode](./docs/host_shadow_mode.md)
 - [Maturity And Limitations](./docs/maturity_and_limitations.md)
 - [Open Source Release Checklist](./docs/open_source_release_checklist.md)
 - [Architecture](./docs/architecture.md)
@@ -117,6 +118,8 @@ Evaluation and examples:
 
 - [Retrieval Eval Guide](./docs/retrieval_eval_guide.md)
 - [Host Runtime Mapping Example](./examples/host_runtime_mapping.md)
+- [Host Shadow Adapter Example](./examples/host_shadow_adapter.py)
+- [Host Backfill Export Example](./examples/host_backfill_export.json)
 - [Sample Events](./examples/sample_events.jsonl)
 
 ## Validation
@@ -139,6 +142,23 @@ Run the archive-state proof checks:
 python .\run_archive_state_model_checks.py --json
 ```
 
+Compare host memory with Solaris in sidecar shadow mode:
+
+```powershell
+python .\tools\shadow_memory_compare.py `
+  --host-json .\examples\shadow_compare_host.json `
+  --solaris-json .\examples\shadow_compare_solaris.json `
+  --json
+```
+
+Backfill a generic host export into a local Solaris database:
+
+```powershell
+python .\tools\backfill_host_export.py `
+  --export .\examples\host_backfill_export.json `
+  --json
+```
+
 CI is intentionally deferred for the first public `alpha` release while Solaris is still being extracted and stabilized as a standalone repository. For now, the expected validation path is local: `pytest` plus the committed eval and proof runners.
 
 If you want a repeatable extraction and local release validation flow from the current workspace, use:
@@ -157,12 +177,14 @@ python .\tools\validate_public_repo.py --repo <path-to-standalone-repo>
 - `policies/` contains editable editorial policy profiles
 - `evals/` contains committed evaluation corpora
 - `tests/` contains Solaris-focused tests
-- `tools/` contains extraction and release-validation helpers
+- `tools/` contains extraction, validation, backfill, and shadow-comparison helpers
 - `docs/` contains design, proof, roadmap, and usage documentation
 
 ## Host Integration Note
 
 Solaris is intentionally host-runtime agnostic. It does not import host application modules; integrations are done through MCP and the standalone web surface.
+
+Hosts that are not ready to hand authority to Solaris can still adopt it in **sidecar shadow mode** first: ingest in parallel, compare recall outputs, inspect divergence, and promote authority later.
 
 The standalone frontend ships in `v0.1` as an optional alpha surface. The primary interface remains the MCP server and related local validation tools.
 

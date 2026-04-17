@@ -1,0 +1,21 @@
+{
+  "claims": [
+    {
+      "canonical_claim": "graph memory is stored structure"
+    },
+    {
+      "canonical_claim": "fractal memory is projected structure"
+    }
+  ],
+  "episodes": [
+    {
+      "title": "graph-fractal-closeout"
+    }
+  ],
+  "recorded": {
+    "divergences": []
+  },
+  "meta": {
+    "scope_intent": "topic"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "scope": {
+    "tenant": "personal",
+    "namespace": "host",
+    "workspace": "default",
+    "project": "core"
+  },
+  "sessions": [
+    {
+      "alias": "runtime_1",
+      "kind": "runtime"
+    },
+    {
+      "alias": "interaction_1",
+      "kind": "interaction",
+      "parent_alias": "runtime_1"
+    }
+  ],
+  "events": [
+    {
+      "session_alias": "interaction_1",
+      "timestamp": "2026-04-17T18:00:00+00:00",
+      "idempotency_key": "backfill-name-1",
+      "kind": "fact_assertion",
+      "raw_text": "Remember my name is Jordan",
+      "normalized_text": "remember my name is jordan",
+      "source_app": "host_runtime",
+      "source_module": "legacy_export",
+      "structured_payload": {
+        "claim": {
+          "predicate": "asserts",
+          "object_text": "operator has name Jordan",
+          "canonical_claim": "operator has name Jordan",
+          "confidence": 0.95,
+          "pinned": false
+        }
+      },
+      "scores": {
+        "importance": 0.95,
+        "confidence": 0.95
+      }
+    },
+    {
+      "session_alias": "interaction_1",
+      "timestamp": "2026-04-17T18:02:00+00:00",
+      "idempotency_key": "backfill-architecture-1",
+      "kind": "decision",
+      "raw_text": "Graph memory depends on fractal memory.",
+      "normalized_text": "graph memory depends on fractal memory",
+      "source_app": "host_runtime",
+      "source_module": "legacy_export",
+      "hints": {
+        "entities": ["graph memory", "fractal memory"],
+        "relations": [
+          {
+            "src": "graph memory",
+            "dst": "fractal memory",
+            "type": "depends_on"
+          }
+        ]
+      },
+      "scores": {
+        "importance": 0.95,
+        "confidence": 0.9
+      }
+    }
+  ],
+  "close_sessions": ["interaction_1"],
+  "reviews": [
+    {
+      "mode": "boundary",
+      "limit": 100
+    }
+  ]
+}
