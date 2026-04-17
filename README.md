@@ -12,48 +12,48 @@ License: `MPL-2.0`
 
 Most memory systems pick one of two bad tradeoffs:
 
-- store everything and pretend it is all equally important
-- compress aggressively and lose the record that would let you explain or correct yourself later
+- Store everything and pretend it is all equally important.
+- Compress aggressively and lose the record that would let you explain or correct yourself later.
 
 Solaris takes a different path:
 
-- raw events remain the source of truth
-- derived memory is editorial, not automatic
-- current belief is separate from recorded history
-- graph structure is stored
-- higher-order patterns are projected as computed views, not stored as synthetic truth
+- Raw events remain the source of truth.
+- Derived memory is editorial, not automatic.
+- Current belief is separate from recorded history.
+- Graph structure is stored.
+- Higher-order patterns are projected as computed views, not stored as synthetic truth.
 
 ## Core Ideas
 
 - `archive != remembered != activated`
-- remembering is a policy decision, not just a storage side effect
-- every surfaced artifact should be explainable through provenance
-- graph memory should be grounded in stored structure
-- fractal or pattern memory should stay computed and confidence-marked
-- divergence between archive and belief should be inspectable instead of hidden
+- Remembering is a policy decision, not just a storage side effect.
+- Every surfaced artifact should be explainable through provenance.
+- Graph memory should be grounded in stored structure.
+- Fractal or pattern memory should stay computed and confidence-marked.
+- Divergence between archive and belief should be inspectable instead of hidden.
 
 ## What Solaris Can Do
 
-- ingest canonical `MemoryEvent` records
-- derive claims, episodes, entities, relations, and scoped state
-- run editorial review over derived memory
-- query current belief and grounded archive together
-- expose graph-aware retrieval through entities, relations, and timelines
-- project recurring patterns without storing them as durable artifacts
+- Ingest canonical `MemoryEvent` records.
+- Derive claims, episodes, entities, relations, and scoped state.
+- Run editorial review over derived memory.
+- Query current belief and grounded archive together.
+- Expose graph-aware retrieval through entities, relations, and timelines.
+- Project recurring patterns without storing them as durable artifacts.
 
 ## What Solaris Is Not
 
-- not a generic vector-memory wrapper
-- not an autonomous reasoning agent
-- not a polished end-user product
-- not a claim that "the model will figure memory out for you"
+- Not a generic vector-memory wrapper.
+- Not an autonomous reasoning agent.
+- Not a polished end-user product.
+- Not a claim that "the model will figure memory out for you."
 
 ## Quickstart
 
 Requirements:
 
 - Python `3.12+`
-- optional: Node.js for the standalone frontend
+- Optional: Node.js for the standalone frontend.
 
 From the `solaris/` directory:
 
@@ -170,15 +170,15 @@ python .\tools\validate_public_repo.py --repo <path-to-standalone-repo>
 
 ## Repository Layout
 
-- `src/solaris/` contains the server, services, retrieval, derivation, editorial, and storage layers
-- `mcp_tools/` exposes the MCP tool surface
-- `frontend/` contains the standalone Solaris browser app
-- `migrations/` contains inspectable SQLite schema migrations
-- `policies/` contains editable editorial policy profiles
-- `evals/` contains committed evaluation corpora
-- `tests/` contains Solaris-focused tests
-- `tools/` contains extraction, validation, backfill, and shadow-comparison helpers
-- `docs/` contains design, proof, roadmap, and usage documentation
+- `src/solaris/` contains the server, services, retrieval, derivation, editorial, and storage layers.
+- `mcp_tools/` exposes the MCP tool surface.
+- `frontend/` contains the standalone Solaris browser app.
+- `migrations/` contains inspectable SQLite schema migrations.
+- `policies/` contains editable editorial policy profiles.
+- `evals/` contains committed evaluation corpora.
+- `tests/` contains Solaris-focused tests.
+- `tools/` contains extraction, validation, backfill, and shadow-comparison helpers.
+- `docs/` contains design, proof, roadmap, and usage documentation.
 
 ## Host Integration Note
 
