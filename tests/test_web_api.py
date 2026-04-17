@@ -43,7 +43,7 @@ def _seed_memory(services: dict, scope: ScopeRef) -> None:
         session_id="sess-web-1",
         timestamp="2026-04-16T10:00:00+00:00",
         idempotency_key="evt-web-1",
-        raw_text="My name is Jonas and Solaris maps memory into graph structure.",
+        raw_text="My name is Jordan and Solaris maps memory into graph structure.",
     )
     second = make_event(
         scope=scope,

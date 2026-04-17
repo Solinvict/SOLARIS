@@ -31,7 +31,7 @@ Current `meta` fields:
 - `project_focus_applied`
 - `recent_focus_applied`
 
-Current internal scope-intent values:
+Current scope-intent values surfaced in metadata:
 - `this_session`
 - `recent`
 - `project`

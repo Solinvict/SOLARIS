@@ -176,8 +176,8 @@ OPERATIONAL_ROUTINE_EPISODE_TITLES = {
     "current session context",
     "active session context",
     "switch to trading mode",
-    "investigate-court-base",
-    "voice pipeline trace request",
+    "codebase investigation request",
+    "audio pipeline trace request",
     "solaris",
 }
 

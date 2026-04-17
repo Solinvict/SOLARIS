@@ -150,7 +150,7 @@ This lets retrieval evals also enforce memory-policy outcomes where appropriate.
 
 The current corpus is deliberately small but high-signal.
 
-We are not trying to create a huge benchmark set before the behavior is stable enough to deserve it. We are building a compact suite that catches:
+It is designed to catch:
 - wrong memory layer choice
 - wrong scope behavior
 - topic-recall drift

@@ -187,9 +187,9 @@ Current behavior:
 - rationale storage shape now captures rule action, suggested action, final action, and prompt version
 - [run_adjudication_shadow_report.py](../run_adjudication_shadow_report.py) can now report eligible cases, hard-lock reasons, and near-misses from the live DB
 
-## Recommended Next Step
+## Suggested Adoption Path
 
-The next implementation step should be:
+A practical adoption path is:
 
 1. add a concrete small-model adjudicator implementation behind an interface
 2. restrict it to claims and episodes first

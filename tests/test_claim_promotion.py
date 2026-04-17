@@ -58,10 +58,10 @@ def test_fact_assertion_memory_name_normalizes_to_operator_identity_claim(servic
             session_id=session.session_id,
             timestamp="2026-04-10T09:00:00+00:00",
             idempotency_key="claim-remember-name",
-            raw_text="remember my name is Jonas",
-            normalized_text="remember my name is jonas",
+            raw_text="remember my name is Jordan",
+            normalized_text="remember my name is jordan",
             kind="fact_assertion",
-            hints={"pin": True, "entities": ["Jonas"]},
+            hints={"pin": True, "entities": ["Jordan"]},
             structured_payload={
                 "route_domain": "memory",
                 "route_action": "remember_fact",
@@ -73,11 +73,11 @@ def test_fact_assertion_memory_name_normalizes_to_operator_identity_claim(servic
     )
     with services["db"].transaction() as connection:
         claims = services["claims_repo"].list_by_scope(connection, scope.key(), limit=10)
-        claim = next(item for item in claims if "Jonas" in item["canonical_claim"])
+        claim = next(item for item in claims if "Jordan" in item["canonical_claim"])
         state = services["editorial_repo"].get_state(connection, artifact_type="claim", artifact_id=claim["claim_id"])
-    assert claim["canonical_claim"] == "operator has name Jonas"
+    assert claim["canonical_claim"] == "operator has name Jordan"
     assert claim["predicate"] == "has name"
-    assert claim["object_text"] == "Jonas"
+    assert claim["object_text"] == "Jordan"
     assert state["remember_state"] == "remembered"
     assert state["pinned"] is True
 
@@ -91,27 +91,27 @@ def test_explicit_claim_payload_normalizes_personal_operator_claims(services, sc
             session_id=session.session_id,
             timestamp="2026-04-10T09:01:00+00:00",
             idempotency_key="claim-explicit-personal-context",
-            raw_text="remember my name is Jonas and I live in Example City",
-            normalized_text="remember my name is jonas and i live in example city",
+            raw_text="remember my name is Jordan and I live in Example City",
+            normalized_text="remember my name is jordan and i live in example city",
             kind="fact_assertion",
-            hints={"pin": True, "entities": ["Jonas", "Example City"]},
+            hints={"pin": True, "entities": ["Jordan", "Example City"]},
             structured_payload={
                 "route_domain": "memory",
                 "route_action": "remember_fact",
                 "pin": True,
                 "claims": [
                     {
-                        "subject_name": "Jonas",
+                        "subject_name": "Jordan",
                         "predicate": "has name",
-                        "object_text": "Jonas",
-                        "canonical_claim": "Jonas has name Jonas",
+                        "object_text": "Jordan",
+                        "canonical_claim": "Jordan has name Jordan",
                         "confidence": 0.9,
                     },
                     {
-                        "subject_name": "Jonas",
+                        "subject_name": "Jordan",
                         "predicate": "lives in",
                         "object_text": "Example City",
-                        "canonical_claim": "Jonas lives in Example City",
+                        "canonical_claim": "Jordan lives in Example City",
                         "confidence": 0.9,
                     },
                 ],
@@ -125,10 +125,10 @@ def test_explicit_claim_payload_normalizes_personal_operator_claims(services, sc
         claims = services["claims_repo"].list_by_scope(connection, scope.key(), limit=10)
         canonical_claims = {item["canonical_claim"] for item in claims}
 
-    assert "operator has name Jonas" in canonical_claims
+    assert "operator has name Jordan" in canonical_claims
     assert "operator lives in Example City" in canonical_claims
-    assert "Jonas has name Jonas" not in canonical_claims
-    assert "Jonas lives in Example City" not in canonical_claims
+    assert "Jordan has name Jordan" not in canonical_claims
+    assert "Jordan lives in Example City" not in canonical_claims
 
 
 def test_question_like_message_does_not_create_claim(services, scope):
