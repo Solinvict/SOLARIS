@@ -177,6 +177,4 @@ Good candidates for future expansion:
 
 ## Related Docs
 
-- [retrieval_and_evaluation_roadmap.md](./retrieval_and_evaluation_roadmap.md)
 - [query_contract.md](./query_contract.md)
-- [v1_execution_roadmap.md](./v1_execution_roadmap.md)

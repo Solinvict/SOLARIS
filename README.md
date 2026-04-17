@@ -104,7 +104,6 @@ Start here:
 - [Usage Guide](./docs/usage_guide.md)
 - [Host Shadow Mode](./docs/host_shadow_mode.md)
 - [Maturity And Limitations](./docs/maturity_and_limitations.md)
-- [Open Source Release Checklist](./docs/open_source_release_checklist.md)
 - [Architecture](./docs/architecture.md)
 - [Event Schema](./docs/event_schema.md)
 - [Query Contract](./docs/query_contract.md)
@@ -115,7 +114,6 @@ Deep design and proof docs:
 - [Archive-State Memory Model](./docs/archive_state_memory_model.md)
 - [Fractal Memory Philosophy](./docs/fractal_memory_philosophy.md)
 - [Proof](./docs/Proof.md)
-- [Graph And Fractal Closeout](./docs/graph_and_fractal_closeout.md)
 
 Evaluation and examples:
 
@@ -162,14 +160,7 @@ python .\tools\backfill_host_export.py `
   --json
 ```
 
-CI is intentionally deferred for the first public `alpha` release while Solaris is still being extracted and stabilized as a standalone repository. For now, the expected validation path is local: `pytest` plus the committed eval and proof runners.
-
-If you want a repeatable extraction and local release validation flow from the current workspace, use:
-
-```powershell
-python .\tools\extract_standalone_repo.py --dest <path-to-standalone-repo> --force
-python .\tools\validate_public_repo.py --repo <path-to-standalone-repo>
-```
+CI is intentionally deferred for the first public `alpha` release. For now, the expected validation path is local: `pytest` plus the committed eval and proof runners.
 
 ## Repository Layout
 
@@ -180,8 +171,8 @@ python .\tools\validate_public_repo.py --repo <path-to-standalone-repo>
 - `policies/` contains editable editorial policy profiles.
 - `evals/` contains committed evaluation corpora.
 - `tests/` contains Solaris-focused tests.
-- `tools/` contains extraction, validation, backfill, and shadow-comparison helpers.
-- `docs/` contains design, proof, roadmap, and usage documentation.
+- `tools/` contains backfill and shadow-comparison helpers.
+- `docs/` contains design, proof, and usage documentation.
 
 ## Host Integration Note
 

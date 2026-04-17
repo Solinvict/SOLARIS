@@ -18,10 +18,6 @@ This is not a proof that Solaris is a State Space Model.
 It is a proof that Solaris implements the archive-state memory shape described in:
 - [Archive-State Memory Model](./archive_state_memory_model.md)
 - [Fractal Memory Philosophy](./fractal_memory_philosophy.md)
-- [Graph And Fractal Closeout](./graph_and_fractal_closeout.md)
-
-Next-phase roadmap:
-- [Post-V1 Roadmap](./post_v1_roadmap.md)
 
 ## The Claim
 
