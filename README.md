@@ -3,6 +3,10 @@
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 
+<p align="center">
+  <img src="./assets/solaris-logo.svg" alt="Solaris orbital logo" width="340" />
+</p>
+
 Solaris is an archive-grounded editorial memory substrate for long-lived AI systems.
 
 It archives broadly, derives structure cautiously, remembers selectively through editorial judgment, and retrieves with provenance. It is designed for builders who want memory that stays inspectable and honest instead of collapsing everything into fuzzy recall.

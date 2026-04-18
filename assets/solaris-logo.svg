@@ -1,0 +1,65 @@
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<svg width="680" height="680" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Solaris logo — animated</title>
+<desc>S at centre, four orbital equation rings rotating at different speeds and directions, clipped to canvas.</desc>
+
+<defs>
+  <clipPath id="canvas">
+    <rect width="680" height="680"/>
+  </clipPath>
+  <path id="o1" d="M 340,252 A 88,88 0 1,1 339.999,252"/>
+  <path id="o2" d="M 340,210 A 130,130 0 1,1 339.999,210"/>
+  <path id="o3" d="M 340,170 A 170,170 0 1,1 339.999,170"/>
+  <path id="o4" d="M 340,130 A 210,210 0 1,1 339.999,130"/>
+</defs>
+
+<rect width="680" height="680" fill="#0a0a0a"/>
+
+<g clip-path="url(#canvas)">
+  <circle cx="340" cy="340" r="88" fill="none" stroke="#1ecfcf" stroke-width="0.4" opacity="0.15"/>
+  <circle cx="340" cy="340" r="130" fill="none" stroke="#e8a020" stroke-width="0.4" opacity="0.12"/>
+  <circle cx="340" cy="340" r="170" fill="none" stroke="#e8a020" stroke-width="0.4" opacity="0.10"/>
+  <circle cx="340" cy="340" r="210" fill="none" stroke="#888888" stroke-width="0.4" opacity="0.08"/>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 340 340" to="360 340 340" dur="40s" repeatCount="indefinite"/>
+    <text font-family="monospace" font-size="9" fill="#1ecfcf" letter-spacing="0.08em">
+      <textPath href="#o1" startOffset="0%">E_t = E_(t-1) ∪ {u_t}  ·  E_t = E_(t-1) ∪ {u_t}  ·  E_t = E_(t-1) ∪ {u_t}  ·  E_t = E_(t-1) ∪ {u_t}  ·  </textPath>
+    </text>
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 340 340" to="-360 340 340" dur="55s" repeatCount="indefinite"/>
+    <text font-family="monospace" font-size="9" fill="#e8a020" letter-spacing="0.08em">
+      <textPath href="#o2" startOffset="0%">x_t = Ax_(t-1) + Bφ(u_t)  ·  x_t = Ax_(t-1) + Bφ(u_t)  ·  x_t = Ax_(t-1) + Bφ(u_t)  ·  </textPath>
+    </text>
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 340 340" to="360 340 340" dur="70s" repeatCount="indefinite"/>
+    <text font-family="monospace" font-size="9" fill="#e8a020" letter-spacing="0.08em" opacity="0.8">
+      <textPath href="#o3" startOffset="15%">y_t = f(Cx_t, G(E_t, q))  ·  y_t = f(Cx_t, G(E_t, q))  ·  y_t = f(Cx_t, G(E_t, q))  ·  y_t = f(Cx_t, G(E_t, q))  ·  </textPath>
+    </text>
+  </g>
+
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 340 340" to="-360 340 340" dur="90s" repeatCount="indefinite"/>
+    <text font-family="monospace" font-size="9" fill="#888888" letter-spacing="0.08em">
+      <textPath href="#o4" startOffset="30%">δ_t = G(E_t, q) \ Cx_t  ·  δ_t = G(E_t, q) \ Cx_t  ·  δ_t = G(E_t, q) \ Cx_t  ·  δ_t = G(E_t, q) \ Cx_t  ·  δ_t = G(E_t, q) \ Cx_t  ·  </textPath>
+    </text>
+  </g>
+
+  <text x="340" y="378" text-anchor="middle" font-family="monospace" font-weight="500" font-size="96" fill="#f0f0f0">S</text>
+</g>
+
+<text x="340" y="610" text-anchor="middle" font-family="monospace" font-weight="500" font-size="13" fill="#f0f0f0" letter-spacing="0.45em">SOLARIS</text>
+
+<text y="632" font-family="monospace" font-size="9" letter-spacing="0.18em">
+  <tspan x="245" fill="#1ecfcf">archive</tspan>
+  <tspan fill="#444444"> · </tspan>
+  <tspan fill="#e8a020">believe</tspan>
+  <tspan fill="#444444"> · </tspan>
+  <tspan fill="#888888">diverge</tspan>
+</text>
+
+</svg>
