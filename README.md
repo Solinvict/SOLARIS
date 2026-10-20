@@ -65,7 +65,8 @@ Requirements:
 From the `solaris/` directory:
 
 ```powershell
-python -m pip install -e .[dev]
+python -m pip install -r requirements-windows-py313.lock
+python -m pip install -e .[dev] --no-deps
 ```
 
 Run the MCP server over stdio:

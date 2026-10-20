@@ -56,6 +56,7 @@ def _build_adjudicator(settings: Settings):
 
 
 def build_services(settings: Settings) -> dict:
+    from solaris.services.history import OriginalHistoryService
     configure_logging(settings.log_level)
     db = Database(settings.db_path)
     apply_migrations(db, settings.project_root / "migrations")
@@ -106,6 +107,7 @@ def build_services(settings: Settings) -> dict:
         "state_repo": state_repo,
         "sessions": SessionService(db, sessions_repo, episodes_repo),
         "ingest": IngestService(db, events_repo, pipeline),
+        "history": OriginalHistoryService(db, events_repo, pipeline),
         "review": ReviewService(db, editorial_repo, engine),
         "query": QueryService(
             db,

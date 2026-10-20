@@ -12,7 +12,8 @@ This guide gets Solaris running locally as an MCP server or standalone web surfa
 From the `solaris/` directory:
 
 ```powershell
-python -m pip install -e .[dev]
+python -m pip install -r requirements-windows-py313.lock
+python -m pip install -e .[dev] --no-deps
 ```
 
 That installs:
