@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import argparse
 
-from mcp.server.fastmcp import FastMCP
-
 from solaris.clock import Clock
 from solaris.config import Settings
 from solaris.derive import DerivationPipeline
@@ -149,6 +147,11 @@ def build_services(settings: Settings) -> dict:
 
 
 def build_mcp(settings: Settings) -> FastMCP:
+    # The storage and service factory is also used by native AEON missions.
+    # Keep the optional MCP transport dependency at the transport boundary so
+    # callers that only need Solaris services do not require the MCP package.
+    from mcp.server.fastmcp import FastMCP
+
     services = build_services(settings)
     mcp = FastMCP(
         name="Solaris",
