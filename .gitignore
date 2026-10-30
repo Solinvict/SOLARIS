@@ -5,6 +5,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+build/
+*.egg-info/
 
 # Local runtime and databases
 .runtime/

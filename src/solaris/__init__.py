@@ -2,7 +2,15 @@
 
 """Solaris standalone memory MCP server."""
 
-__all__ = ["__version__"]
+from .host import CapabilitySet, PublishReceipt, SolarisHost, StoreIdentity
 
-__version__ = "0.1.0"
+__all__ = [
+    "CapabilitySet",
+    "PublishReceipt",
+    "SolarisHost",
+    "StoreIdentity",
+    "__version__",
+]
+
+__version__ = "0.2.0"
 

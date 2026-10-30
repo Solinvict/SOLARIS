@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from importlib.resources import files
 
 from .db import Database
 
@@ -30,3 +31,9 @@ def apply_migrations(db: Database, migrations_dir: Path) -> None:
                 "INSERT INTO schema_migrations(filename) VALUES (?)",
                 (path.name,),
             )
+
+
+def package_migrations_path() -> Path:
+    """Return the installed Solaris migration directory."""
+
+    return Path(str(files("solaris").joinpath("migrations")))

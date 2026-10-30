@@ -53,7 +53,8 @@ class OriginalHistoryService:
         event = dict(envelope)
         claimed_digest = event.pop("event_sha256", None)
         if (
-            event.get("schema") != "aeon-original-history/v1"
+            event.get("schema")
+            not in {"aeon-original-history/v1", "solaris-original-history/v1"}
             or digest(event) != claimed_digest
             or event.get("scope_key") != scope.key()
         ):

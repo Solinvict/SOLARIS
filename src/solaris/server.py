@@ -23,7 +23,7 @@ from solaris.mcp_tools import (
 )
 from solaris.services import EntityService, ExplainService, IngestService, PatternProjectionService, QueryService, ReviewService, SessionService, TimelineService
 from solaris.storage import Database
-from solaris.storage.migrate import apply_migrations
+from solaris.storage.migrate import apply_migrations, package_migrations_path
 from solaris.storage.repos import (
     ClaimsRepo,
     EditorialRepo,
@@ -57,7 +57,7 @@ def build_services(settings: Settings) -> dict:
     from solaris.services.history import OriginalHistoryService
     configure_logging(settings.log_level)
     db = Database(settings.db_path)
-    apply_migrations(db, settings.project_root / "migrations")
+    apply_migrations(db, package_migrations_path())
     clock = Clock()
 
     sessions_repo = SessionsRepo(clock)

@@ -15,6 +15,14 @@ Status: `alpha` / `research preview`
 
 License: `MPL-2.0`
 
+## Supported host contract
+
+Version `0.2.0` exposes `SolarisHost` for trusted applications that need
+scope-bound, idempotent publication of exact investigation events and
+content-addressed artifacts. The contract provides stable store identity,
+capability negotiation, exact readback and scoped retrieval. It deliberately
+does not invoke Editorial or grant scientific authority to retained material.
+
 ## Why Solaris Exists
 
 Most memory systems pick one of two bad tradeoffs:
